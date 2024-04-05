@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 const touneyRoute = require('./routes/tourneyRoutes');
 const userRoute = require('./routes/userRoutes');
-//const teamRoute = require('./routes/teamRoutes');
+const teamRoute = require('./routes/teamRoutes');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser')
 const port = 2000;
@@ -22,7 +22,7 @@ app.use(cookieParser())
 //route
 app.use('/api/tournement',touneyRoute);
 app.use('/api/user',userRoute);
-//app.use('/api',teamRoute);
+app.use('/api/team',teamRoute);
 
 mongoose.connect('mongodb+srv://jwh:lea123@cluster0.sskwijd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 .then(()=>{
@@ -33,7 +33,3 @@ mongoose.connect('mongodb+srv://jwh:lea123@cluster0.sskwijd.mongodb.net/?retryWr
 .catch((error)=>{
     console.log(error)
 })
-
-
-
-
