@@ -24,6 +24,10 @@ app.use('/api/tournement',touneyRoute);
 app.use('/api/user',userRoute);
 app.use('/api/team',teamRoute);
 
+app.all('*', (req, res) => { 
+    return
+});
+
 mongoose.connect('mongodb+srv://jwh:lea123@cluster0.sskwijd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 .then(()=>{
     app.listen(port,()=>{
