@@ -8,7 +8,9 @@ import SoloBrackets from "./components/SoloBrackets";
 import TeamBrackets from "./components/TeamBrackets";
 import BattleRoyale from "./components/BattleRoyale";
 import { useNavigate, useParams } from "react-router-dom";
-import sanitizeHtml from 'sanitize-html';
+import { sanitize } from '/src/lib/HTMLUtils.js';
+import TournamentSchedule from "/src/components/TournamentSchedule";
+import { formatDate } from "/src/lib/DateUtils";
 
 const tournamentURL = `${import.meta.env.VITE_BACKEND_URL}/api/tournement/tournament`;
 const teamsURL = `${import.meta.env.VITE_BACKEND_URL}/api/team/user/teamsList`;
@@ -481,29 +483,6 @@ function Tournament() {
     return valid;
   }
 
-  function formatDate(dateString) {
-    const date = new Date(dateString);
-
-    // Get month abbreviation
-    const monthAbbreviation = date.toLocaleString('default', { month: 'short' });
-
-    // Get day of the month
-    const day = date.getDate();
-
-    // Get hour (12-hour format)
-    let hour = date.getHours();
-    const ampm = hour >= 12 ? 'pm' : 'am';
-    hour = hour % 12 || 12; // Convert 0 to 12
-
-    // Get minutes
-    const minutes = date.getMinutes();
-
-    // Format the string
-    const formattedDate = `${monthAbbreviation} ${day} ${date.getFullYear()} @${hour}:${minutes < 10 ? '0' : ''}${minutes}${ampm}`;
-
-    return formattedDate;
-  }
-
   return (
     <div id="Tournament">
       <Nav />
@@ -515,10 +494,10 @@ function Tournament() {
             <div className="tournament-info">
               <div className="tournament-specs">
                 <h1 className="tournament-title">{tournament.title}</h1>
-                <div className="tournament-description" dangerouslySetInnerHTML={{ __html: sanitizeHtml(tournament.description) }}></div>
+                <div className="tournament-description" dangerouslySetInnerHTML={{ __html: sanitize(tournament.description) }}></div>
                 {tournament.rules && <div className="tournament-rules-wrapper">
                   <h3>Rules & Regulations</h3>
-                  <div className="tournament-rules" dangerouslySetInnerHTML={{ __html: sanitizeHtml(tournament.rules) }}></div>
+                  <div className="tournament-rules" dangerouslySetInnerHTML={{ __html: sanitize(tournament.rules) }}></div>
                 </div>}
                 {tournament.contactInfo && (tournament.contactInfo.email || tournament.contactInfo.phone || (tournament.contactInfo.socialMedia && (tournament.contactInfo.socialMedia.discord || tournament.contactInfo.socialMedia.instagram || tournament.contactInfo.socialMedia.twitter || tournament.contactInfo.socialMedia.facebook))) && (
                   <div className="tournament-contact-info">
@@ -625,6 +604,7 @@ function Tournament() {
         <></>
       )}
       <NotEnoughCreditsPopup />
+      <TournamentSchedule tournament={tournament} />
     </div>
   );
 }

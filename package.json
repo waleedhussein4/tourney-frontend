@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aldabil/react-scheduler": "^2.9.3",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.20",
@@ -17,12 +18,14 @@
     "axios": "^1.6.7",
     "cleave-zen": "^0.0.17",
     "dotenv": "^16.4.5",
+    "jsdom": "^24.1.0",
     "react": "^18.3.1",
     "react-brackets": "^0.4.7",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.0",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.23.1",
+    "react-toastify": "^10.0.5",
     "sanitize-html": "^2.13.0",
     "uuid": "^9.0.1",
     "validator": "^13.12.0"

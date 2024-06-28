@@ -1,19 +1,22 @@
 /* eslint-disable react/prop-types */
-import Nav from '/src/components/Nav.jsx'
+import './Manage.css'
 
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import './Manage.css'
+import Nav from '/src/components/Nav.jsx'
 import pencil from '/src/assets/pencil.svg'
-
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import sanitizeHtml from 'sanitize-html';
+import { sanitize } from '/src/lib/HTMLUtils.js';
+import TournamentSchedule from '/src/components/TournamentSchedule.jsx';
+import React from 'react';
+import EventManager from './components/EventManager';
+import { formatDate } from '/src/lib/DateUtils.js';
 
 function Manage() {
   const [showEditTitlePopup, setShowEditTitlePopup] = useState(false)
@@ -24,9 +27,7 @@ function Manage() {
   const [showEditEndDatePopup, setShowEditEndDatePopup] = useState(false);
   const [showPostUpdatePopup, setShowPostUpdatePopup] = useState(false);
   const [showEditSoloParticipantsPopup, setShowEditSoloParticipantsPopup] = useState(false);
-
   const [editTeamParticipantsPopupOpen, setEditTeamParticipantsPopupOpen] = useState(false)
-
   const [showEditSoloBracketsParticipantsPopup, setShowEditSoloBracketsParticipantsPopup] = useState(false)
   const [showEditTeamBracketsParticipantsPopup, setShowEditTeamBracketsParticipantsPopup] = useState(false)
 
@@ -71,29 +72,6 @@ function Manage() {
   useEffect(() => {
     fetchTournamentData();
   }, []);
-
-  function formatDate(dateString) {
-    const date = new Date(dateString);
-
-    // Get month abbreviation
-    const monthAbbreviation = date.toLocaleString('default', { month: 'short' });
-
-    // Get day of the month
-    const day = date.getDate();
-
-    // Get hour (12-hour format)
-    let hour = date.getHours();
-    const ampm = hour >= 12 ? 'pm' : 'am';
-    hour = hour % 12 || 12; // Convert 0 to 12
-
-    // Get minutes
-    const minutes = date.getMinutes();
-
-    // Format the string
-    const formattedDate = `${monthAbbreviation} ${day} ${date.getFullYear()} @${hour}:${minutes < 10 ? '0' : ''}${minutes}${ampm}`;
-
-    return formattedDate;
-  }
 
   function EditButton({ canBeEditedAfterStart, onclick }) {
     return (
@@ -1270,12 +1248,10 @@ function Manage() {
       {showEditEndDatePopup && <EditEndDatePopup />}
       {showPostUpdatePopup && <PostUpdatePopup />}
       {showEditSoloParticipantsPopup && <EditSoloParticipantsPopup />}
-
       {editTeamParticipantsPopupOpen && <EditTeamParticipantsPopup />}
       {showEditSoloBracketsParticipantsPopup && <EditSoloBracketsParticipantsPopup />}
       {showEditTeamBracketsParticipantsPopup && <EditTeamBracketsParticipantsPopup />}
 
-      { }
       <Nav />
       <div id="container">
         {isLoading
@@ -1294,12 +1270,12 @@ function Manage() {
                 </div>
                 <div className="attribute editable description">
                   <h3>Description</h3>
-                  <div className='content' dangerouslySetInnerHTML={{ __html: sanitizeHtml(tournament.description) }}></div>
+                  <div className='content' dangerouslySetInnerHTML={{ __html: sanitize(tournament.description) }}></div>
                   <EditButton canBeEditedAfterStart={false} onclick={() => setShowEditDescriptionModal(true)} />
                 </div>
                 <div className="attribute editable rules">
                   <h3>Rules</h3>
-                  <div className='content' dangerouslySetInnerHTML={{ __html: sanitizeHtml(tournament.rules) }}></div>
+                  <div className='content' dangerouslySetInnerHTML={{ __html: sanitize(tournament.rules) }}></div>
                   <EditButton canBeEditedAfterStart={false} onclick={() => setShowEditRulesModal(true)} />
                 </div>
                 <div className="attribute editable contact-info">
@@ -1384,6 +1360,7 @@ function Manage() {
                   <div className="pencil-placeholder"></div>
                 </div>
               </div>
+              <EventManager tournament={tournament} setTournament={setTournament} UUID={UUID} />
               {tournament.type === 'brackets' && <MatchesEditor />}
               {!tournament.hasStarted && tournament.earnings > 0 && <Bank />}
               <div className="controlButtons">
@@ -1393,6 +1370,7 @@ function Manage() {
                 }
                 <div className="error"></div>
               </div>
+              <TournamentSchedule tournament={tournament} />
             </>
           )}
       </div>

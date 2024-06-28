@@ -5,6 +5,7 @@ import Nav from "../../components/Nav";
 import { AuthContext } from "../../context/AuthContext";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'
+import { stripHtml } from '/src/lib/HTMLUtils.js';
 
 export default function Host() {
 
@@ -173,11 +174,6 @@ export default function Host() {
     const updatedPrizes = [...inputPrizes];
     updatedPrizes[index].prize = value;
     setInputPrizes(updatedPrizes);
-  };
-
-  const stripHtml = (html) => {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    return doc.body.textContent || "";
   };
 
   const handleDescribeChange = (event) => {

@@ -63,12 +63,14 @@
 }
 
 #Manage .pencil,
-#Manage .pencil-placeholder {
+#Manage .pencil-placeholder,
+#Manage .bin {
   height: 1.5em;
   width: 1.5em;
 }
 
-#Manage .pencil:hover {
+#Manage .pencil:hover,
+#Manage .bin:hover {
   cursor: pointer;
 }
 
@@ -104,7 +106,7 @@
   cursor: pointer;
 }
 
-#Manage .popup .error {
+#Manage .error {
   color: var(--color-red);
 }
 
@@ -262,7 +264,7 @@
 }
 
 #Manage #editParticipantsPopup .team-details-accordian {
-  display: flex; 
+  display: flex;
   flex-direction: column;
   gap: 2em;
 }
@@ -306,10 +308,6 @@
   width: fit-content;
 }
 
-#Manage #matchesEditor .error {
-  color: var(--color-red);
-}
-
 #Manage #bank {
   display: flex;
   flex-direction: column;
@@ -330,7 +328,7 @@
 }
 
 #Manage #bank .balance {
- width: 100%;
+  width: 100%;
 }
 
 #Manage #bank .balance-header {
@@ -364,10 +362,6 @@
   display: flex;
   flex-direction: row;
   gap: 1em;
-}
-
-#Manage .controlButtons .error {
-  color: var(--color-red);
 }
 
 #Manage #depositCreditsPopup {

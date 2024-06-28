@@ -14,29 +14,35 @@ import Manage from "./pages/manage/Manage";
 import BecomeHost from "./pages/BecomeHost/BecomeHost";
 import Credits from "./pages/credits/Credits.jsx";
 import NotFound from "./pages/notfound/notfound";
+import { ToastContainer } from "react-toastify";
 
 import "/src/styles/index.css";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   return (
-    <Routes>
-      <Route path="/signin" element={<Signin />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/" element={<Home />} />
-      <Route path="/tournaments" element={<Tournaments />} />
-      <Route path="/team" element={<Team />} />
-      <Route path="/team/view" element={<ViewTeam />} />
-      <Route path="/purchase/:product?" element={<Purchase />} />
-      <Route path="/team/join/:teamCode" element={<JoinTeam />} />
-      <Route path="/tournament/:UUID?" element={<Tournament />} />
-      <Route path="/host" element={<Host />} />
-      <Route path="/tournament/:UUID/manage" element={<Manage />} />
-      <Route path="/credits" element={<Credits />} />
-      <Route path="/become-host" element={<BecomeHost />} />
-      <Route path="/page-not-found" element={<NotFound />} />
-      <Route path="*" element={<Navigate to="/page-not-found" replace />} /> 
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/tournaments" element={<Tournaments />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/team/view" element={<ViewTeam />} />
+        <Route path="/purchase/:product?" element={<Purchase />} />
+        <Route path="/team/join/:teamCode" element={<JoinTeam />} />
+        <Route path="/tournament/:UUID?" element={<Tournament />} />
+        <Route path="/host" element={<Host />} />
+        <Route path="/tournament/:UUID/manage" element={<Manage />} />
+        <Route path="/credits" element={<Credits />} />
+        <Route path="/become-host" element={<BecomeHost />} />
+        <Route path="/page-not-found" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/page-not-found" replace />} />
+      </Routes>
+      <ToastContainer />
+    </>
   );
 }
 

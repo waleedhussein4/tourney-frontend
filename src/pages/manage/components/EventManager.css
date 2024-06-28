@@ -1,0 +1,60 @@
+#Manage #event-manager {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid white;
+  padding: 1em;
+}
+
+#Manage #event-manager .event {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid white;
+}
+
+#Manage #event-manager .event .title {
+  font-size: large;
+  font-weight: bold;
+}
+
+#Manage #event-manager .event .details {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+#Manage #event-manager .event .editor {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+}
+
+#Manage #event-manager .event .editor .fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3em;
+}
+
+#Manage #event-manager .event .editor .field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+#Manage #event-manager .new-event {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+  background-color: rgb(44, 44, 44);
+
+}
+
+#Manage #event-manager .new-event-btn {
+  width: fit-content;
+}
+
+#Manage #event-manager .participants-picker {
+  background-color: white;
+}

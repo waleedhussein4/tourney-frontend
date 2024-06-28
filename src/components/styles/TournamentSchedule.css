@@ -1,0 +1,20 @@
+.schedule-popover {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.schedule-popover .section-header {
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+}
+
+.schedule-popover .participants .participant {
+  width: fit-content;
+  padding: 0.5em;
+}
+
+.schedule-popover .participants .participant:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
